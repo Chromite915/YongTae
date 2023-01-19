@@ -2,7 +2,7 @@ package 개인프로젝트;
 
 public class a01메모 {
 	/* dbms 관련해서는 자유롭게 질문 가능
-	 * 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 - 깃허브 토큰
+	 * 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 - 깃허브 토큰
 	 * 문의댓글 확인하기
 	 * 
 	 * 
