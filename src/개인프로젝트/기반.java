@@ -239,11 +239,11 @@ public class 기반 extends JFrame implements ActionListener {
 				
 				// JComboBox Dept에서 선택된 부서의 직원만을 출력하도록 조건 추가.
 				if (Category.getSelectedItem().toString() == "부서별") {		// 콤보박스가 전체가 아니라 부서별이면
-					if (Dept.getSelectedItem().toString() == "Research")	// 부서별이면서 
+					if (Dept.getSelectedItem().toString() == "Research")	// 우측 콤보박스 1
 						stmt += " and dname = \"Research\";";
-					else if (Dept.getSelectedItem().toString() == "Administration")
+					else if (Dept.getSelectedItem().toString() == "Administration")	// 2
 						stmt += " and dname = \"Administration\";";
-					else if (Dept.getSelectedItem().toString() == "Headquarters")
+					else if (Dept.getSelectedItem().toString() == "Headquarters")	// 3
 						stmt += " and dname = \"Headquarters\";";
 				}
 				
