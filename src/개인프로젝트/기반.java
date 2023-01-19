@@ -139,7 +139,6 @@ public class 기반 extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {				// DB연결도 Action에 들어가나?
 
-												// DB연결
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver"); // JDBC 드라이버 연결
 
@@ -178,17 +177,17 @@ public class 기반 extends JFrame implements ActionListener {
 				Head.add("선택");
 				
 				// 두번째 checkbox (c2)부터는 이전의 checkbox select 여부에 따라 경우를 나눠서 SQL SELECT문을 완성해야 함.
-				String stmt = "select";
+				String stmt = "select";			// 최좌측 '선택' 체크박스
 				if (c1.isSelected()) {
 					stmt += " concat(e.fname,' ', e.minit,' ', e.lname,' ') as Name";
-					Head.add("NAME");
+					Head.add("NAME");					// 선택 체크박스 옆에 NAME칸 추가
 				}
 				if (c2.isSelected()) {
-					if (!c1.isSelected())
+					if (!c1.isSelected())		// c2가 체크상태이면서, c1도 체크상태이면
 						stmt += " e.ssn";
-					else
+					else						// stmt에 계속 누적
 						stmt += ", e.ssn";
-					Head.add("SSN");
+					Head.add("SSN");			// head에 계속 누적
 				}
 				if (c3.isSelected()) {
 					if (!c1.isSelected() && !c2.isSelected())
@@ -235,12 +234,12 @@ public class 기반 extends JFrame implements ActionListener {
 						stmt += ", dname";
 					Head.add("DEPARTMENT");
 				}
-				stmt += " from employee e left outer join employee s on e.super_ssn=s.ssn, department where e.dno = dnumber";
+				stmt += " from employee e left outer join supervisor s on e.super_ssn=s.ssn, department where e.dno = dnumber";	// supervisor가 employee로 되어있어서 수정함
 				// Left outer join을 하는 이유는 Supervisor가 없는 경우(NULL)도 표시하기 위함.
 				
 				// JComboBox Dept에서 선택된 부서의 직원만을 출력하도록 조건 추가.
-				if (Category.getSelectedItem().toString() == "부서별") {
-					if (Dept.getSelectedItem().toString() == "Research")
+				if (Category.getSelectedItem().toString() == "부서별") {		// 콤보박스가 전체가 아니라 부서별이면
+					if (Dept.getSelectedItem().toString() == "Research")	// 부서별이면서 
 						stmt += " and dname = \"Research\";";
 					else if (Dept.getSelectedItem().toString() == "Administration")
 						stmt += " and dname = \"Administration\";";
