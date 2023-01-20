@@ -1,4 +1,4 @@
-package 개인프로젝트;
+package PersonalProject;
 
 public class a01메모 {
 	/* dbms 관련해서는 자유롭게 질문 가능

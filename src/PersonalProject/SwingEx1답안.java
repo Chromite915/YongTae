@@ -1,4 +1,4 @@
-package 개인프로젝트;
+package PersonalProject;
 
 import javax.swing.*;
 

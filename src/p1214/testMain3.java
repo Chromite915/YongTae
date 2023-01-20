@@ -1,9 +1,9 @@
 package p1214;
 
-class Point {							// 부모
+class PointThis {							// 부모
 	private int x, y;
 	
-	public Point(int x, int y) {		// 부모 생성자
+	public PointThis(int x, int y) {		// 부모 생성자
 		this.x = x; this.y = y; 
 		}
 	public int getX() {
@@ -17,7 +17,7 @@ class Point {							// 부모
 		}
 }
 
-class Point3D extends Point {			// 자식
+class Point3D extends PointThis {			// 자식
 	private int z ;
 	
 	Point3D (int x, int y, int z){		// 자식 생성자

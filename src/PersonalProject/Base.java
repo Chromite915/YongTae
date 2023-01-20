@@ -1,4 +1,4 @@
-package 개인프로젝트;
+package PersonalProject;
 
 import java.sql.*;
 import java.util.*;
@@ -10,7 +10,7 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class 기반 extends JFrame implements ActionListener {
+public class Base extends JFrame implements ActionListener {
 
 	public Connection conn;
 	public Statement s;
@@ -51,7 +51,7 @@ public class 기반 extends JFrame implements ActionListener {
 	private JButton Delete_Button = new JButton("선택한 데이터 삭제");
 	int count = 0;
 
-	public 기반() {
+	public Base() {
 
 		JPanel ComboBoxPanel = new JPanel();
 		String[] category = { "전체", "부서별" };
@@ -470,6 +470,6 @@ public class 기반 extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		new 기반();
+		new Base();
 	}
 }

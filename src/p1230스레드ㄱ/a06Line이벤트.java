@@ -10,6 +10,7 @@ public class a06Line이벤트 extends JFrame {
     private JButton btns[] = { new JButton("play"), new JButton("stop"),
                                 new JButton("play again")};
     private Clip clip;
+    JLabel label = new JLabel();
 
     public a06Line이벤트() {
     	setTitle("오디오 제어");
