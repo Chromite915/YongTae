@@ -131,6 +131,8 @@ public class Base extends JFrame implements ActionListener {
 		setSize(1300, 600);
 		setLocationRelativeTo(null);							// 화면 중앙에 창 위치
 		setVisible(true);
+		
+		AdviceDialogEx1 dialog = new AdviceDialogEx1(this);
 	}
 	
 	
@@ -326,6 +328,7 @@ public class Base extends JFrame implements ActionListener {
 		}
 
 		// DELETE
+		
 		if (e.getSource() == Delete_Button) {
 			Vector<String> delete_ssn = new Vector<String>();
 

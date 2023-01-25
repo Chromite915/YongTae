@@ -20,13 +20,13 @@ public class MyP extends JFrame implements ActionListener {
 	private JComboBox Dept;
 
 	private JCheckBox c1 = new JCheckBox("Name", true);
-	private JCheckBox c2 = new JCheckBox("Ssn", true);
-	private JCheckBox c3 = new JCheckBox("Bdate", true);
-	private JCheckBox c4 = new JCheckBox("Address", true);
-	private JCheckBox c5 = new JCheckBox("Sex", true);
-	private JCheckBox c6 = new JCheckBox("Salary", true);
-	private JCheckBox c7 = new JCheckBox("Supervisor", true);
-	private JCheckBox c8 = new JCheckBox("Department", true);
+	private JCheckBox c2 = new JCheckBox("Stock Count", true);
+	private JCheckBox c3 = new JCheckBox("OS", true);
+	private JCheckBox c4 = new JCheckBox("Display Size", true);
+	private JCheckBox c5 = new JCheckBox("ChipSet", true);
+	private JCheckBox c6 = new JCheckBox("Memory", true);
+	private JCheckBox c7 = new JCheckBox("Ram", true);
+	private JCheckBox c8 = new JCheckBox("Battery", true);
 	private Vector<String> Head = new Vector<String>();
 
 	private JTable table;							// JTable = 데이터를 행렬 방식으로 표시. Scrollable 인터페이스가 구현되어있어 JScrollPane에 붙여 스크롤할 수 있다.
@@ -36,36 +36,37 @@ public class MyP extends JFrame implements ActionListener {
 	private int SALARY_COLUMN = 0;
 	private String dShow;
 
-	private JButton Search_Button = new JButton("검색");
+	private JButton Search_Button = new JButton("Search");
 	Container me = this;
 
-	private JLabel totalEmp = new JLabel("인원수 : ");
+	private JLabel totalEmp = new JLabel("인원수 : "); 			// 삭제하기
 	final JLabel totalCount = new JLabel();
 	JPanel panel;
 	JScrollPane ScPane;
-	private JLabel Emplabel = new JLabel("선택한 직원: ");
+	private JLabel Emplabel = new JLabel("Selected Model : ");
 	private JLabel ShowSelectedEmp = new JLabel();
-	private JLabel Setlabel = new JLabel("새로운 Salary: ");
-	private JTextField setSalary = new JTextField(10);
-	private JButton Update_Button = new JButton("UPDATE");
-	private JButton Delete_Button = new JButton("선택한 데이터 삭제");
+	private JLabel Setlabel = new JLabel("새로운 Salary: ");		// 삭제하기
+	private JTextField setSalary = new JTextField(10);			// 삭제하기
+	private JButton Detail_Button = new JButton("Detail");
+	private JButton Update_Button = new JButton("Sell Input");
+	private JButton Delete_Button = new JButton("Stock Move");
 	int count = 0;
 
 	public MyP() {
 
 		JPanel ComboBoxPanel = new JPanel();
-		String[] category = { "전체", "부서별" };
-		String[] dept = { "Research", "Administration", "Headquarters" };
-		Category = new JComboBox(category);									// 배열을 다이렉트로 콤보박스로 변환
+		String[] category = { "ALL", "OS" };								// 배열을 만들고
+		String[] dept = { "Android", "IOS" };
+		Category = new JComboBox(category);									// 만든 배열을 콤보박스의 내용물로 지정(대소문자 다름)
 		Dept = new JComboBox(dept);
 		ComboBoxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			// Top
-		ComboBoxPanel.add(new JLabel("검색 범위 "));
+		ComboBoxPanel.add(new JLabel("Search Level"));
 		ComboBoxPanel.add(Category);
 		ComboBoxPanel.add(Dept);
 
 		JPanel CheckBoxPanel = new JPanel();
 		CheckBoxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			// Top
-		CheckBoxPanel.add(new JLabel("검색 항목 "));
+		CheckBoxPanel.add(new JLabel("Search Item "));
 		CheckBoxPanel.add(c1);
 		CheckBoxPanel.add(c2);
 		CheckBoxPanel.add(c3);
@@ -88,6 +89,7 @@ public class MyP extends JFrame implements ActionListener {
 		TotalPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		TotalPanel.add(totalEmp);
 		TotalPanel.add(totalCount);
+		TotalPanel.add(Detail_Button);
 
 		JPanel UpdatePanel = new JPanel();									// Bottom
 		UpdatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -131,6 +133,21 @@ public class MyP extends JFrame implements ActionListener {
 		setSize(1300, 600);
 		setLocationRelativeTo(null);							// 화면 중앙에 창 위치
 		setVisible(true);
+		
+		
+		
+		// [[[[다이얼로그 연동]]]]
+		AdviceDialogEx1 dialog = new AdviceDialogEx1(this);			// 만들어놓은 다이얼로그와 연동하기
+		Delete_Button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dialog.setVisible(true);					// Delete_Button을 누르면 연동한 다이얼로그를 구현
+			}
+		});
+		// oven 참고해서 적합한 다이얼로그 만들고, 그거랑 새로 연동할것
+		// [[[[다이얼로그 연동]]]]
 	}
 	
 	
@@ -225,6 +242,7 @@ public class MyP extends JFrame implements ActionListener {
 					else
 						stmt += ", concat(s.fname, ' ', s.minit, ' ',s.lname,' ') as Supervisor ";
 					Head.add("SUPERVISOR");
+					// [[[ssn을 매칭하여 supervisor를 표시함]]]
 				}
 				if (c8.isSelected()) {
 					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected() && !c5.isSelected()
@@ -233,6 +251,7 @@ public class MyP extends JFrame implements ActionListener {
 					else
 						stmt += ", dname";
 					Head.add("DEPARTMENT");
+					// [[[부서번호를 매칭하여 부서이름을 표시함]]]
 				}
 				stmt += " from employee e left outer join supervisor s on e.super_ssn=s.ssn, department where e.dno = dnumber";	// supervisor가 employee로 되어있어서 수정함
 				// Left outer join을 하는 이유는 Supervisor가 없는 경우(NULL)도 표시하기 위함.
@@ -326,7 +345,7 @@ public class MyP extends JFrame implements ActionListener {
 		}
 
 		// DELETE
-		if (e.getSource() == Delete_Button) {
+		if (e.getSource() == Delete_Button) {				// Delete_Button의 기능은 위에서 다이얼로그로 대체되었음
 			Vector<String> delete_ssn = new Vector<String>();
 
 			try {
@@ -382,16 +401,17 @@ public class MyP extends JFrame implements ActionListener {
 
 		} 								// DELETE 끝
 
-		// UPDATE
+		// UPDATEㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		// 이걸 재고량 수정으로 바꿀거야
 		if (e.getSource() == Update_Button) {
 			Vector<String> update_ssn = new Vector<String>();
 			try {
-				String columnName = model.getColumnName(6);
-				if (columnName == "SALARY") {
+				String columnName = model.getColumnName(6);	// Stock Count 체크박스가 위치한 번호로 수정하기
+				if (columnName == "SALARY") {				// Stock Count로 수정하기
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (table.getValueAt(i, 0) == Boolean.TRUE) {
 							update_ssn.add((String) table.getValueAt(i, 2));
-							String updateSalary = setSalary.getText();
+							String updateSalary = setSalary.getText();	// 현재 월급TF 참조상태이지만, 판매/이동 버튼 누르면 나오는 TF를 참조하도록 수정하기
 							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);
 						}
 					}
@@ -472,6 +492,4 @@ public class MyP extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		new MyP();
 	}
-
 }
-
