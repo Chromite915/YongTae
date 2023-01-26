@@ -2,7 +2,7 @@
 -- Query: SELECT * FROM sample.phone
 LIMIT 0, 1000
 
--- Date: 2023-01-26 16:51
+-- Date: 2023-01-26 18:29
 */
-INSERT INTO `` (`name`,`os`,`size`,`chipset`,`memory`,`ram`,`battery`) VALUES ('IPhone14PM','IOS','Andriod','e','c','d','a');
-INSERT INTO `` (`name`,`os`,`size`,`chipset`,`memory`,`ram`,`battery`) VALUES ('ZFold4','Android','Andriod','ZFold4 C','ZFold4 M','ZFold4 R','ZFold4 B');
+INSERT INTO `` (`name`,`os`,`size`,`chipset`,`memory`,`ram`,`battery`,`count`) VALUES ('IPhone14 Pro Max','IOS','? Inch','A16 Bionic','256GB ~ 1TB','? GB','? mAh',5);
+INSERT INTO `` (`name`,`os`,`size`,`chipset`,`memory`,`ram`,`battery`,`count`) VALUES ('Z Fold 4','Android','7.6Inch','Snap Dragon 8+Gen1','512GB ~ 1TB','12GB','4400mAh',5);

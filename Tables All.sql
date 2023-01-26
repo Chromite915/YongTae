@@ -1,7 +1,10 @@
 CREATE DATABASE `sample` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 CREATE TABLE `buyer` (
   `name` varchar(45) DEFAULT NULL,
-  `pnum` varchar(45) DEFAULT NULL
+  `model` varchar(45) DEFAULT NULL,
+  `imei` varchar(45) DEFAULT NULL,
+  `phonenum` varchar(45) DEFAULT NULL,
+  `selldate` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `department` (
   `dname` varchar(45) DEFAULT NULL,
@@ -30,15 +33,15 @@ CREATE TABLE `phone` (
   `memory` varchar(45) DEFAULT NULL,
   `ram` varchar(45) DEFAULT NULL,
   `battery` varchar(45) DEFAULT NULL,
+  `count` int DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `stock` (
-  `count` int NOT NULL,
+  `model` varchar(45) DEFAULT NULL,
   `imei` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
   `color` varchar(45) DEFAULT NULL,
-  `sdate` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`count`)
+  `movedate` varchar(45) DEFAULT NULL,
+  `goal` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 CREATE TABLE `supervisor` (
   `fname` varchar(45) DEFAULT NULL,

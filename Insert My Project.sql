@@ -1,9 +1,9 @@
-insert into phone (name, battery, size, memory, ram, chipset, os) 
-values ('ZFold4', 'ZFold4 B', 'Andriod', 'ZFold4 M', 'ZFold4 R', 'ZFold4 C', 'Android');
-insert into phone (name, battery, size, memory, ram, chipset, os) 
-values ('IPhone14PM', 'a', 'Andriod', 'c', 'd', 'e', 'IOS');
+insert into phone (name, os, size, chipset, memory, ram, battery, count) 
+values ('Z Fold 4', 'Android', '7.6Inch', 'Snap Dragon 8+Gen1', '512GB ~ 1TB', '12GB', '4400mAh', 5);
+insert into phone (name, os, size, chipset, memory, ram, battery, count) 
+values ('IPhone14 Pro Max', 'IOS', '? Inch', 'A16 Bionic', '256GB ~ 1TB', '? GB', '? mAh', 5);
 
-insert into stock (count, imei, name, color, sdate) values (100, '1234', 'ZFold4', 'GG', '23.01.26');
+insert into stock (model, imei, color, movedate) values ('Z Fold 4', '1234', 'GG', '23.01.26');
 
 select * from phone; 
 select * from stock;
