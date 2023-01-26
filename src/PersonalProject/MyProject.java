@@ -10,23 +10,23 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class Base extends JFrame implements ActionListener {
+public class MyProject extends JFrame implements ActionListener {
 
 	public Connection conn;
 	public Statement s;
 	public ResultSet r;
 
-	private JComboBox Category;
-	private JComboBox Dept;
+	private JComboBox OsCategory;
+	private JComboBox Oscb;
 
-	private JCheckBox c1 = new JCheckBox("Name", true);
-	private JCheckBox c2 = new JCheckBox("Ssn", true);
-	private JCheckBox c3 = new JCheckBox("Bdate", true);
-	private JCheckBox c4 = new JCheckBox("Address", true);
-	private JCheckBox c5 = new JCheckBox("Sex", true);
-	private JCheckBox c6 = new JCheckBox("Salary", true);
-	private JCheckBox c7 = new JCheckBox("Supervisor", true);
-	private JCheckBox c8 = new JCheckBox("Department", true);
+	private JCheckBox c1 = new JCheckBox("모델명", true);
+	private JCheckBox c2 = new JCheckBox("OS", true);
+	private JCheckBox c3 = new JCheckBox("디스플레이 크기", true);
+	private JCheckBox c4 = new JCheckBox("칩셋", true);
+	private JCheckBox c5 = new JCheckBox("저장용량", true);
+	private JCheckBox c6 = new JCheckBox("RAM", true);
+	private JCheckBox c7 = new JCheckBox("배터리", true);
+	private JCheckBox c8 = new JCheckBox("재고량", true);
 	private Vector<String> Head = new Vector<String>();
 
 	private JTable table;							// JTable = 데이터를 행렬 방식으로 표시. Scrollable 인터페이스가 구현되어있어 JScrollPane에 붙여 스크롤할 수 있다.
@@ -39,29 +39,30 @@ public class Base extends JFrame implements ActionListener {
 	private JButton Search_Button = new JButton("검색");
 	Container me = this;
 
-	private JLabel totalEmp = new JLabel("인원수 : ");
+	private JLabel totalEmp = new JLabel("인원수 : "); 			// 삭제하기
 	final JLabel totalCount = new JLabel();
 	JPanel panel;
 	JScrollPane ScPane;
-	private JLabel Emplabel = new JLabel("선택한 직원: ");
+	private JLabel Emplabel = new JLabel("Selected Model : ");
 	private JLabel ShowSelectedEmp = new JLabel();
-	private JLabel Setlabel = new JLabel("새로운 Salary: ");
-	private JTextField setSalary = new JTextField(10);
-	private JButton Update_Button = new JButton("UPDATE");
-	private JButton Delete_Button = new JButton("선택한 데이터 삭제");
+	private JLabel Setlabel = new JLabel("새로운 Salary: ");		// 삭제하기
+	private JTextField setSalary = new JTextField(10);			// 삭제하기
+	private JButton Detail_Button = new JButton("기록 조회");
+	private JButton Update_Button = new JButton("판매 등록");
+	private JButton Delete_Button = new JButton("재고 이동");
 	int count = 0;
 
-	public Base() {
+	public MyProject() {
 
 		JPanel ComboBoxPanel = new JPanel();
-		String[] category = { "전체", "부서별" };
-		String[] dept = { "Research", "Administration", "Headquarters" };
-		Category = new JComboBox(category);									// 배열을 다이렉트로 콤보박스로 변환
-		Dept = new JComboBox(dept);
+		String[] category = { "전체", "OS" };								// 배열을 만들고
+		String[] oslist = { "Android", "IOS" };
+		OsCategory = new JComboBox(category);									// 만든 배열을 콤보박스의 내용물로 지정(대소문자 다름)
+		Oscb = new JComboBox(oslist);
 		ComboBoxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			// Top
-		ComboBoxPanel.add(new JLabel("검색 범위 "));
-		ComboBoxPanel.add(Category);
-		ComboBoxPanel.add(Dept);
+		ComboBoxPanel.add(new JLabel("검색 레벨"));
+		ComboBoxPanel.add(OsCategory);
+		ComboBoxPanel.add(Oscb);
 
 		JPanel CheckBoxPanel = new JPanel();
 		CheckBoxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			// Top
@@ -88,6 +89,7 @@ public class Base extends JFrame implements ActionListener {
 		TotalPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		TotalPanel.add(totalEmp);
 		TotalPanel.add(totalCount);
+		TotalPanel.add(Detail_Button);
 
 		JPanel UpdatePanel = new JPanel();									// Bottom
 		UpdatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -132,7 +134,40 @@ public class Base extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);							// 화면 중앙에 창 위치
 		setVisible(true);
 		
-		AdviceDialogEx1 dialog = new AdviceDialogEx1(this);
+		
+		
+		// [[[[다이얼로그 연동]]]]
+		AdviceDialogEx1 dialog1 = new AdviceDialogEx1(this);			// 만들어놓은 다이얼로그와 연동하하기
+		Update_Button.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dialog1.setVisible(true);					// Delete_Button을 누르면 연동한 다이얼로그를 구현
+			}
+		});
+
+		AdviceDialogEx2 dialog2 = new AdviceDialogEx2(this);			// 만들어놓은 다이얼로그와 연동하하기
+		Delete_Button.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dialog2.setVisible(true);					// Delete_Button을 누르면 연동한 다이얼로그를 구현
+			}
+		});
+		
+		AdviceDialogEx3 dialog3 = new AdviceDialogEx3(this);			// 만들어놓은 다이얼로그와 연동하하기
+		Detail_Button.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				dialog3.setVisible(true);					// Delete_Button을 누르면 연동한 다이얼로그를 구현
+			}
+		});
+		// [[[[다이얼로그 연동]]]]
+		// oven 참고해서 적합한 다이얼로그 만들고, 그거랑 새로 연동할것
 	}
 	
 	
@@ -142,10 +177,10 @@ public class Base extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {				// DB연결도 Action에 들어가나?
 
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); // JDBC 드라이버 연결
+			Class.forName("com.mysql.cj.jdbc.Driver"); 
 
 			String user = "root";
-			String pwd = "6534"; 				// 비밀번호 입력
+			String pwd = "6534"; 				
 			String dbname = "sample";
 			String url = "jdbc:mysql://localhost:3306/" + dbname + "?serverTimezone=UTC";
 
@@ -179,74 +214,72 @@ public class Base extends JFrame implements ActionListener {
 				Head.add("선택");
 				
 				// 두번째 checkbox (c2)부터는 이전의 checkbox select 여부에 따라 경우를 나눠서 SQL SELECT문을 완성해야 함.
-				String stmt = "select";			// 최좌측 '선택' 체크박스
+				String stmt = "select";				// 최좌측 '선택' 체크박스
 				if (c1.isSelected()) {
-					stmt += " concat(e.fname,' ', e.minit,' ', e.lname,' ') as Name";
-					Head.add("NAME");					// 선택 체크박스 옆에 NAME칸 추가
+					stmt += " phone.name";
+					Head.add("모델명");					// 선택 체크박스 옆에 NAME칸 추가
 				}
 				if (c2.isSelected()) {
-					if (!c1.isSelected())		// c2가 체크상태이면서, c1도 체크상태이면
-						stmt += " e.ssn";
-					else						// stmt에 계속 누적
-						stmt += ", e.ssn";
-					Head.add("SSN");			// head에 계속 누적
+					if (!c1.isSelected() && !c2.isSelected())
+						stmt += " phone.os";
+					else
+						stmt += ", phone.os";	// 이 부분도 수정해야하나?
+					Head.add("OS");
 				}
 				if (c3.isSelected()) {
-					if (!c1.isSelected() && !c2.isSelected())
-						stmt += " e.bdate";
+					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected())
+						stmt += " phone.size";
 					else
-						stmt += ", e.bdate";
-					Head.add("BDATE");
+						stmt += ", phone.size";
+					Head.add("디스플레이 크기");
 				}
 				if (c4.isSelected()) {
-					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected())
-						stmt += " e.address";
+					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected())
+						stmt += " phone.chipset";
 					else
-						stmt += ", e.address";
-					Head.add("ADDRESS");
+						stmt += ", phone.chipset";
+					Head.add("칩셋");
 				}
 				if (c5.isSelected()) {
-					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected())
-						stmt += " e.sex";
-					else
-						stmt += ", e.sex";
-					Head.add("SEX");
-				}
-				if (c6.isSelected()) {
 					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected()
 							&& !c5.isSelected())
-						stmt += " e.salary";
+						stmt += " phone.memory";
 					else
-						stmt += ", e.salary";
-					Head.add("SALARY");
+						stmt += ", phone.memory";
+					Head.add("저장용량");
+				}
+				if (c6.isSelected()) {
+					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected() && !c5.isSelected()
+							&& !c6.isSelected())
+						stmt += " phone.ram";
+					else
+						stmt += ", phone.ram";
+					Head.add("RAM");
+					// [[[ssn을 매칭하여 supervisor를 표시함]]]
 				}
 				if (c7.isSelected()) {
 					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected() && !c5.isSelected()
-							&& !c6.isSelected())
-						stmt += " concat(s.fname, ' ', s.minit, ' ',s.lname,' ') as Supervisor ";
+							&& !c6.isSelected() && !c7.isSelected())
+						stmt += " phone.battery";
 					else
-						stmt += ", concat(s.fname, ' ', s.minit, ' ',s.lname,' ') as Supervisor ";
-					Head.add("SUPERVISOR");
+						stmt += ", phone.battery";
+					Head.add("배터리");
+					// [[[부서번호를 매칭하여 부서이름을 표시함]]]
 				}
 				if (c8.isSelected()) {
-					if (!c1.isSelected() && !c2.isSelected() && !c3.isSelected() && !c4.isSelected() && !c5.isSelected()
-							&& !c6.isSelected() && !c7.isSelected())
-						stmt += " dname";
-					else
-						stmt += ", dname";
-					Head.add("DEPARTMENT");
+					if (!c1.isSelected())				// c2가 체크상태이면서, c1도 체크상태이면
+						stmt += " stock.count";
+					else								// stmt에 계속 누적
+						stmt += ", stock.count";		// 이 부분도 수정해야하나?
+					Head.add("재고량");			// head에 계속 누적
 				}
-				stmt += " from employee e left outer join supervisor s on e.super_ssn=s.ssn, department where e.dno = dnumber";	// supervisor가 employee로 되어있어서 수정함
-				// Left outer join을 하는 이유는 Supervisor가 없는 경우(NULL)도 표시하기 위함.
+				stmt += " from phone, stock";
 				
-				// JComboBox Dept에서 선택된 부서의 직원만을 출력하도록 조건 추가.
-				if (Category.getSelectedItem().toString() == "부서별") {		// 콤보박스가 전체가 아니라 부서별이면
-					if (Dept.getSelectedItem().toString() == "Research")	// 우측 콤보박스 1
-						stmt += " and dname = \"Research\";";
-					else if (Dept.getSelectedItem().toString() == "Administration")	// 2
-						stmt += " and dname = \"Administration\";";
-					else if (Dept.getSelectedItem().toString() == "Headquarters")	// 3
-						stmt += " and dname = \"Headquarters\";";
+				if (OsCategory.getSelectedItem().toString() == "OS") {		// 콤보박스가 전체가 아니라 부서별이면
+					if (Oscb.getSelectedItem().toString() == "Android")		// 우측 콤보박스 1
+						stmt += " and phone.os = \"Android\";";
+					else if (Oscb.getSelectedItem().toString() == "IOS")	// 2
+						stmt += " and phone.os = \"IOS\";";
 				}
 				
 				
@@ -314,22 +347,22 @@ public class Base extends JFrame implements ActionListener {
 				}
 				panel = new JPanel();
 				ScPane = new JScrollPane(table);
-				table.getModel().addTableModelListener(new CheckBoxModelListener());
+				//table.getModel().addTableModelListener(new CheckBoxModelListener());
 				ScPane.setPreferredSize(new Dimension(1100, 400));
 				panel.add(ScPane);
 				add(panel, BorderLayout.CENTER);
 				revalidate();
-				// 이를 JScrollPane에 넣어 갱신된 화면을 revalidate()를 통해 출력.
+							// 이를 JScrollPane에 넣어 갱신된 화면을 revalidate()를 통해 출력.
 
 			} else {
 				JOptionPane.showMessageDialog(null, "검색 항목을 한개 이상 선택하세요.");		// 검색항목 아무것도 선택 안하면 뜨는 창
 			}
-
 		}
 
+		}
+/*
 		// DELETE
-		
-		if (e.getSource() == Delete_Button) {
+		if (e.getSource() == Delete_Button) {				// Delete_Button의 기능은 위에서 다이얼로그로 대체되었음
 			Vector<String> delete_ssn = new Vector<String>();
 
 			try {
@@ -385,16 +418,17 @@ public class Base extends JFrame implements ActionListener {
 
 		} 								// DELETE 끝
 
-		// UPDATE
+		// UPDATEㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		// 이걸 재고량 수정으로 바꿀거야
 		if (e.getSource() == Update_Button) {
 			Vector<String> update_ssn = new Vector<String>();
 			try {
-				String columnName = model.getColumnName(6);
-				if (columnName == "SALARY") {
+				String columnName = model.getColumnName(6);	// Stock Count 체크박스가 위치한 번호로 수정하기
+				if (columnName == "SALARY") {				// Stock Count로 수정하기
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (table.getValueAt(i, 0) == Boolean.TRUE) {
 							update_ssn.add((String) table.getValueAt(i, 2));
-							String updateSalary = setSalary.getText();
+							String updateSalary = setSalary.getText();	// 현재 월급TF 참조상태이지만, 판매/이동 버튼 누르면 나오는 TF를 참조하도록 수정하기
 							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);
 						}
 					}
@@ -470,9 +504,11 @@ public class Base extends JFrame implements ActionListener {
 				}
 			}
 		}
-	}
+	}*/
 
 	public static void main(String[] args) {
-		new Base();
+		new MyProject();
+		
+		
 	}
 }

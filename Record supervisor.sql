@@ -1,5 +1,5 @@
 /*
--- Query: SELECT * FROM sample.supervisior
+-- Query: SELECT * FROM sample.supervisor
 LIMIT 0, 1000
 
 -- Date: 2023-01-19 10:54
