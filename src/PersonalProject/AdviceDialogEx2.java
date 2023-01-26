@@ -22,30 +22,32 @@ import javax.swing.JTextField;
 // 다이얼로그의 내용만을 정의하고 다른 클래스와 연결함
 
 class AdviceDialogEx2 extends JDialog {
-	private JTextField id = new JTextField(10);
-	private JPasswordField pwd = new JPasswordField(10);
-	private JTextField phone = new JTextField(10);
+	private JTextField model = new JTextField(10);
+	private JTextField imei = new JTextField(10);
+	private JTextField buyerName = new JTextField(10);
+	private JTextField buyerPhoneNumber = new JTextField(10);
+	private JTextField sellDate = new JTextField(10);
 	private String [] adress = {"서울", "인천", "제주도", "기타(해외)"};
 	
 	public AdviceDialogEx2(JFrame f) {
 		super(f, "test", true);
 		setLayout(null);
-		setResizable(false);
+		setResizable(true);
 		
-		JLabel title = new JLabel("Stock Move");
+		JLabel title = new JLabel("재고 이동");
 		title.setLocation(120 , 15);
 		title.setSize(150, 30);
 		title.setFont(new Font("serif", Font.BOLD, 25));
 		add(title);
 		
-		JLabel idLabel = new JLabel("아이디 : ");
+		JLabel idLabel = new JLabel("기종 : ");
 		idLabel.setLocation(30 , 60);
 		idLabel.setSize(100, 20);
 		idLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(idLabel);
-		id.setLocation(140, 63);
-		id.setSize(100, 20);
-		id.addKeyListener(new KeyListener() {
+		model.setLocation(140, 63);
+		model.setSize(100, 20);
+		model.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -67,81 +69,63 @@ class AdviceDialogEx2 extends JDialog {
 				// TODO Auto-generated method stub
 			}
 		});
-		add(id);	
-		JLabel pwdLabel = new JLabel("패스워드 : ");
+		add(model);	
+		JLabel pwdLabel = new JLabel("IMEI : ");
 		pwdLabel.setLocation(30 , 100);
 		pwdLabel.setSize(100, 20);
 		pwdLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(pwdLabel);
-		pwd.setLocation(140, 103);
-		pwd.setSize(100, 20);
-		add(pwd);
+		imei.setLocation(140, 103);
+		imei.setSize(100, 20);
+		add(imei);
 		
-		JLabel addrLabel = new JLabel("주소 : ");
+		JLabel addrLabel = new JLabel("고객명 : ");
 		addrLabel.setLocation(30 , 140);
 		addrLabel.setSize(100, 20);
 		addrLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(addrLabel);
-		JComboBox<String> strCombo = new JComboBox<String>(adress);
-		strCombo.setLocation(140, 143);
-		strCombo.setSize(100, 20);
-		add(strCombo);
+		buyerName.setLocation(140, 143);
+		buyerName.setSize(100, 20);
+		add(buyerName);
 		
-		JLabel hLabel = new JLabel("취미 : ");
+		JLabel hLabel = new JLabel("전화번호 : ");
 		hLabel.setLocation(30 , 180);
 		hLabel.setSize(100, 20);
 		hLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(hLabel);
-		JCheckBox chk1 = new JCheckBox("운동");
-		JCheckBox chk2 = new JCheckBox("게임");
-		JCheckBox chk3 = new JCheckBox("영화감상");
-		chk1.setLocation(140, 183);
-		chk1.setSize(50, 20);
-		add(chk1);
-		chk2.setLocation(190, 183);
-		chk2.setSize(50, 20);
-		add(chk2);
-		chk3.setLocation(240, 183);
-		chk3.setSize(80, 20);
-		add(chk3);
+		buyerPhoneNumber.setLocation(140, 183);
+		buyerPhoneNumber.setSize(100, 20);
+		add(buyerPhoneNumber);
 		
-		JLabel sLabel = new JLabel("성별 : ");
+		JLabel sLabel = new JLabel("판매일 : ");
 		sLabel.setLocation(30 , 220);
 		sLabel.setSize(100, 20);
 		sLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(sLabel);
-		ButtonGroup group = new ButtonGroup();
-		JRadioButton rd1 = new JRadioButton("남자");
-		JRadioButton rd2 = new JRadioButton("여자");
-		group.add(rd1);
-		group.add(rd2);
-		rd1.setLocation(140, 223);
-		rd1.setSize(50, 20);
-		rd2.setLocation(190, 223);
-		rd2.setSize(50, 20);
-		add(rd1);
-		add(rd2);
+		sellDate.setLocation(140, 223);
+		sellDate.setSize(100, 20);
+		add(sellDate);
 		
-		JButton join = new JButton("회원가입");
+		JButton join = new JButton("등록");
 		
 		join.setLocation(120 , 260);
 		join.setSize(100, 20);
 		join.setFont(new Font("serif", Font.BOLD, 15));
-		join.addActionListener(new ActionListener() {
+		/*join.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(id.getText().equals("") || pwd.getText().equals("") 
+				if(model.getText().equals("") || imei.getText().equals("") 
 						|| (!chk1.isSelected() && !chk2.isSelected() && !chk3.isSelected())
 						|| (!rd1.isSelected() && !rd2.isSelected())) {
 					JOptionPane.showMessageDialog(null, "회원가입 실패 \n모든정보 입력하세요.", "실패", JOptionPane.WARNING_MESSAGE);
 				}
 			}
-		});
+		});*/
 		add(join);
 		
-		setSize(350,400);
+		setSize(600,700);
 //		setVisible(true);
 	}
 }

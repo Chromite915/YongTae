@@ -268,9 +268,9 @@ public class MyProject extends JFrame implements ActionListener {
 				}
 				if (c8.isSelected()) {
 					if (!c1.isSelected())				// c2가 체크상태이면서, c1도 체크상태이면
-						stmt += " stock.count";
+						stmt += " phone.count";
 					else								// stmt에 계속 누적
-						stmt += ", stock.count";		// 이 부분도 수정해야하나?
+						stmt += ", phone.count";		// 이 부분도 수정해야하나?
 					Head.add("재고량");			// head에 계속 누적
 				}
 				stmt += " from phone, stock";

@@ -34,7 +34,7 @@ class AdviceDialogEx1 extends JDialog {
 		setLayout(null);
 		setResizable(true);
 		
-		JLabel title = new JLabel("Sell Input");
+		JLabel title = new JLabel("판매 등록");
 		title.setLocation(120 , 15);
 		title.setSize(150, 30);
 		title.setFont(new Font("serif", Font.BOLD, 25));
@@ -125,7 +125,7 @@ class AdviceDialogEx1 extends JDialog {
 		});*/
 		add(join);
 		
-		setSize(600,700);
+		setSize(350,400);
 //		setVisible(true);
 	}
 }
