@@ -20,7 +20,7 @@ public class AdviceSwingEx1 extends JFrame {
 		c.setLayout(null);
 		setResizable(false);
 		
-		AdviceDialogEx1 dialog = new AdviceDialogEx1(this);		// 만들어놓은 다이얼로그와 연동하기(이제 구현해야)
+		AdviceDialogEx2 dialog = new AdviceDialogEx2(this);		// 만들어놓은 다이얼로그와 연동하기(이제 구현해야)
 		
 		JMenuBar mb = new JMenuBar();
 		JMenu fileMenu = new JMenu("Screen");

@@ -1,6 +1,6 @@
 package PersonalProject;
 
-public class 메모 {
+public class 해야할것 {
 	/* DBMS 관련해서는 자유롭게 질문 가능
 	 * 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 - 깃허브 토큰
 	 * 문의댓글 확인하기
@@ -11,34 +11,27 @@ public class 메모 {
 	 * TextArea에 내용 출력하기
 	 * 
 	 * 
-	 * [할 일]
-	 * 1. Oven 보고 테이블과 컬럼 수정하기
-	 * 2. 판매 등록 :
-	 * 2-1. 입력값들(고객명, 기동, IMEI, 연락처, 판매일)을 Buyer 테이블에 insert 	+ 해당 기종의 재고량 -1
-	 * 3. 재고 이동 :
-	 * 3-2. 목적지가 내 매장 : Stock 테이블에서 Delete 						+ 해당 기종의 재고량 -1
-	 * 3-3. 목적지가 타 매장 : Stock 테이블에서 Insert 						+ 해당 기종의 재고량 +1
-	 * 4. 기록 검색 :
-	 * 4-1. Stock 테이블의 goal과 Market 테이블의 market 을 연동시킬것 (기록 검색에서 목적지를 이용해 Stock 테이블에 접근해야 하기때문)
-	 * 4-2. 기록 출력 방식은 기본화면 검색 결과 형태랑 똑같이
-	 * 
-	 * 
 	 * [과제]
-	 * 인터페이스 완성 - 내용물 수정
+	 * 판매등록 창에서 imei 입력칸에 status가 here인 record의 imei 값만 입력 가능하도록 한다
+	 * OS별, 상태별 검색 가능하도록 하기
+	 * 판매등록, 재고이동 버튼이 기능을 하지 않는다
+	 * 
+	 * 
+	 * [오류]
+	 * 해결 - 갤럭시북에서 오류가 났던 이유는 Properties - Java Build Path - Libraries - MySQL Connector의 경로가 학원컴과 갤북이 달랐기때믄.
 	 * OS별 검색 안됨
-	 * 판매버튼, 재고버튼, Detail버튼 화면 구성하기(창크기 조절에 따른 내용물 재구성하기) - 기능 구현하기
-	 * 어떻게 해야 다이얼로그 클래스의 TF 입력값으로 MyProject DBMS에 접근할 수 있는가?
-	 * 이후 추가적인 개발
-	 * 1. 일련번호 중복 불가
-	 * 2. 판매기록 검색(고객명별, 날자별, 기종별, imei별)
 	 * 
 	 * 
-	 * [오류해결]
-	 * 갤럭시북에서 오류가 났던 이유는 Properties - Java Build Path - Libraries - MySQL Connector의 경로가 학원컴과 갤북이 달랐기때믄. 경로 다시 잡아주니 해결.
 	 * 
 	 * 
-	 * [주의사항]
-	 * 되도록 MySQL릐 데이터들은 JFrame 버튼으로만 수정하도록 만들것
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
 	 * 
 	 * 
 	 * [Base Project]

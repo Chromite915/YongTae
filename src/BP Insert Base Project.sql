@@ -12,13 +12,13 @@ insert into department (dname, dnumber) values ('Research', 101);
 insert into department (dname, dnumber) values ('Administration', 102);
 insert into department (dname, dnumber) values ('Headquarters', 103);
 
-insert into supervisor (fname, minit, lname, ssn) values ('홍', '길', '동2', 1234);
-insert into supervisor (fname, minit, lname, ssn) values ('유', '재', '석2', 2345);
-insert into supervisor (fname, minit, lname, ssn) values ('강', '호', '동2', 3456);
+insert into supervisor (fname, minit, lname, ssn) values ('홍', '길', '동2', 4321);
+insert into supervisor (fname, minit, lname, ssn) values ('유', '재', '석2', 5432);
+insert into supervisor (fname, minit, lname, ssn) values ('강', '호', '동2', 6543);
 
 select * from employee; 
 select * from department;
-select * from supervisior;
+select * from supervisor;
 
 delete from employee;
 delete from department;

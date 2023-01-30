@@ -132,7 +132,7 @@ public class BaseProject extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);							// 화면 중앙에 창 위치
 		setVisible(true);
 		
-		AdviceDialogEx1 dialog = new AdviceDialogEx1(this);
+		AdviceDialogEx2 dialog = new AdviceDialogEx2(this);
 	}
 	
 	
@@ -328,8 +328,7 @@ public class BaseProject extends JFrame implements ActionListener {
 		}
 
 		// DELETE
-		
-		if (e.getSource() == Delete_Button) {
+		if (e.getSource() == Delete_Button) {				// Delete_Button의 기능은 위에서 다이얼로그로 대체되었음
 			Vector<String> delete_ssn = new Vector<String>();
 
 			try {
@@ -385,16 +384,17 @@ public class BaseProject extends JFrame implements ActionListener {
 
 		} 								// DELETE 끝
 
-		// UPDATE
+		// UPDATEㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+		// 이걸 재고량 수정으로 바꿀거야
 		if (e.getSource() == Update_Button) {
 			Vector<String> update_ssn = new Vector<String>();
 			try {
-				String columnName = model.getColumnName(6);
-				if (columnName == "SALARY") {
+				String columnName = model.getColumnName(6);	// Stock Count 체크박스가 위치한 번호로 수정하기
+				if (columnName == "SALARY") {				// Stock Count로 수정하기
 					for (int i = 0; i < table.getRowCount(); i++) {
 						if (table.getValueAt(i, 0) == Boolean.TRUE) {
 							update_ssn.add((String) table.getValueAt(i, 2));
-							String updateSalary = setSalary.getText();
+							String updateSalary = setSalary.getText();	// 현재 월급TF 참조상태이지만, 판매/이동 버튼 누르면 나오는 TF를 참조하도록 수정하기
 							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);
 						}
 					}

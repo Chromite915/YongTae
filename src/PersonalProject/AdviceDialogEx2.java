@@ -22,19 +22,18 @@ import javax.swing.JTextField;
 // 다이얼로그의 내용만을 정의하고 다른 클래스와 연결함
 
 class AdviceDialogEx2 extends JDialog {
-	private JTextField model = new JTextField(10);
-	private JTextField imei = new JTextField(10);
-	private JTextField buyerName = new JTextField(10);
-	private JTextField buyerPhoneNumber = new JTextField(10);
-	private JTextField sellDate = new JTextField(10);
-	private String [] adress = {"서울", "인천", "제주도", "기타(해외)"};
+	private JTextField modelTf = new JTextField(10);
+	private JTextField imeiTf = new JTextField(10);
+	private JTextField bNameTf = new JTextField(10);
+	private JTextField bpnumTf = new JTextField("000-000-0000", 10);
+	private JTextField selldateTf = new JTextField("YY.MM.DD", 10);
 	
 	public AdviceDialogEx2(JFrame f) {
 		super(f, "test", true);
 		setLayout(null);
 		setResizable(true);
 		
-		JLabel title = new JLabel("재고 이동");
+		JLabel title = new JLabel("판매 등록");
 		title.setLocation(120 , 15);
 		title.setSize(150, 30);
 		title.setFont(new Font("serif", Font.BOLD, 25));
@@ -45,9 +44,9 @@ class AdviceDialogEx2 extends JDialog {
 		idLabel.setSize(100, 20);
 		idLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(idLabel);
-		model.setLocation(140, 63);
-		model.setSize(100, 20);
-		model.addKeyListener(new KeyListener() {
+		modelTf.setLocation(140, 63);
+		modelTf.setSize(100, 20);
+		modelTf.addKeyListener(new KeyListener() {
 			
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -69,42 +68,42 @@ class AdviceDialogEx2 extends JDialog {
 				// TODO Auto-generated method stub
 			}
 		});
-		add(model);	
+		add(modelTf);	
 		JLabel pwdLabel = new JLabel("IMEI : ");
 		pwdLabel.setLocation(30 , 100);
 		pwdLabel.setSize(100, 20);
 		pwdLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(pwdLabel);
-		imei.setLocation(140, 103);
-		imei.setSize(100, 20);
-		add(imei);
+		imeiTf.setLocation(140, 103);
+		imeiTf.setSize(100, 20);
+		add(imeiTf);
 		
 		JLabel addrLabel = new JLabel("고객명 : ");
 		addrLabel.setLocation(30 , 140);
 		addrLabel.setSize(100, 20);
 		addrLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(addrLabel);
-		buyerName.setLocation(140, 143);
-		buyerName.setSize(100, 20);
-		add(buyerName);
+		bNameTf.setLocation(140, 143);
+		bNameTf.setSize(100, 20);
+		add(bNameTf);
 		
-		JLabel hLabel = new JLabel("전화번호 : ");
+		JLabel hLabel = new JLabel("연락처 : ");
 		hLabel.setLocation(30 , 180);
 		hLabel.setSize(100, 20);
 		hLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(hLabel);
-		buyerPhoneNumber.setLocation(140, 183);
-		buyerPhoneNumber.setSize(100, 20);
-		add(buyerPhoneNumber);
+		bpnumTf.setLocation(140, 183);
+		bpnumTf.setSize(100, 20);
+		add(bpnumTf);
 		
 		JLabel sLabel = new JLabel("판매일 : ");
 		sLabel.setLocation(30 , 220);
 		sLabel.setSize(100, 20);
 		sLabel.setFont(new Font("serif", Font.BOLD, 20));
 		add(sLabel);
-		sellDate.setLocation(140, 223);
-		sellDate.setSize(100, 20);
-		add(sellDate);
+		selldateTf.setLocation(140, 223);
+		selldateTf.setSize(100, 20);
+		add(selldateTf);
 		
 		JButton join = new JButton("등록");
 		
@@ -125,7 +124,7 @@ class AdviceDialogEx2 extends JDialog {
 		});*/
 		add(join);
 		
-		setSize(600,700);
+		setSize(350,400);
 //		setVisible(true);
 	}
 }

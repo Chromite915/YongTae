@@ -39,15 +39,13 @@ public class MyProject extends JFrame implements ActionListener {
 	private JButton Search_Button = new JButton("검색");
 	Container me = this;
 
-	private JLabel totalEmp = new JLabel("인원수 : "); 			// 삭제하기
+	private JLabel totalEmp = new JLabel("보유중인 모델 수 : "); 			// 삭제하기
 	final JLabel totalCount = new JLabel();
 	JPanel panel;
 	JScrollPane ScPane;
 	private JLabel Emplabel = new JLabel("Selected Model : ");
 	private JLabel ShowSelectedEmp = new JLabel();
-	private JLabel Setlabel = new JLabel("새로운 Salary: ");		// 삭제하기
-	private JTextField setSalary = new JTextField(10);			// 삭제하기
-	private JButton Detail_Button = new JButton("기록 조회");
+	private JButton Detail_Button1 = new JButton("기록 조회");
 	private JButton Update_Button = new JButton("판매 등록");
 	private JButton Delete_Button = new JButton("재고 이동");
 	int count = 0;
@@ -55,9 +53,9 @@ public class MyProject extends JFrame implements ActionListener {
 	public MyProject() {
 
 		JPanel ComboBoxPanel = new JPanel();
-		String[] category = { "전체", "OS" };								// 배열을 만들고
+		String[] category = { "전체", "OS" };									// 배열을 만들고
 		String[] oslist = { "Android", "IOS" };
-		OsCategory = new JComboBox(category);									// 만든 배열을 콤보박스의 내용물로 지정(대소문자 다름)
+		OsCategory = new JComboBox(category);								// 만든 배열을 콤보박스의 내용물로 지정(대소문자 다름)
 		Oscb = new JComboBox(oslist);
 		ComboBoxPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			// Top
 		ComboBoxPanel.add(new JLabel("검색 레벨"));
@@ -79,22 +77,19 @@ public class MyProject extends JFrame implements ActionListener {
 
 		JPanel ShowSelectedPanel = new JPanel();							// HalfWay
 		ShowSelectedPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		Emplabel.setFont(new Font("Dialog", Font.BOLD, 16));
+		totalEmp.setFont(new Font("Dialog", Font.BOLD, 16));
 		ShowSelectedEmp.setFont(new Font("Dialog", Font.BOLD, 16));
 		dShow = "";
-		ShowSelectedPanel.add(Emplabel);
+		ShowSelectedPanel.add(totalEmp);
+		ShowSelectedPanel.add(totalCount);
 		ShowSelectedPanel.add(ShowSelectedEmp);
 
 		JPanel TotalPanel = new JPanel();									// Bottom
 		TotalPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-		TotalPanel.add(totalEmp);
-		TotalPanel.add(totalCount);
-		TotalPanel.add(Detail_Button);
+		TotalPanel.add(Detail_Button1);
 
 		JPanel UpdatePanel = new JPanel();									// Bottom
 		UpdatePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-		UpdatePanel.add(Setlabel);
-		UpdatePanel.add(setSalary);
 		UpdatePanel.add(Update_Button);
 
 		JPanel DeletePanel = new JPanel();									// Bottom
@@ -138,7 +133,7 @@ public class MyProject extends JFrame implements ActionListener {
 		
 		// [[[[다이얼로그 연동]]]]
 		AdviceDialogEx1 dialog1 = new AdviceDialogEx1(this);			// 만들어놓은 다이얼로그와 연동하하기
-		Update_Button.addActionListener(new ActionListener() {
+		Detail_Button1.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +143,7 @@ public class MyProject extends JFrame implements ActionListener {
 		});
 
 		AdviceDialogEx2 dialog2 = new AdviceDialogEx2(this);			// 만들어놓은 다이얼로그와 연동하하기
-		Delete_Button.addActionListener(new ActionListener() {
+		Update_Button.addActionListener(new ActionListener() {
 				
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -158,7 +153,7 @@ public class MyProject extends JFrame implements ActionListener {
 		});
 		
 		AdviceDialogEx3 dialog3 = new AdviceDialogEx3(this);			// 만들어놓은 다이얼로그와 연동하하기
-		Detail_Button.addActionListener(new ActionListener() {
+		Delete_Button.addActionListener(new ActionListener() {
 				
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -216,7 +211,7 @@ public class MyProject extends JFrame implements ActionListener {
 				// 두번째 checkbox (c2)부터는 이전의 checkbox select 여부에 따라 경우를 나눠서 SQL SELECT문을 완성해야 함.
 				String stmt = "select";				// 최좌측 '선택' 체크박스
 				if (c1.isSelected()) {
-					stmt += " phone.name";
+					stmt += " phone.model";
 					Head.add("모델명");					// 선택 체크박스 옆에 NAME칸 추가
 				}
 				if (c2.isSelected()) {
@@ -273,7 +268,7 @@ public class MyProject extends JFrame implements ActionListener {
 						stmt += ", phone.count";		// 이 부분도 수정해야하나?
 					Head.add("재고량");			// head에 계속 누적
 				}
-				stmt += " from phone, stock";
+				stmt += " from phone";
 				
 				if (OsCategory.getSelectedItem().toString() == "OS") {		// 콤보박스가 전체가 아니라 부서별이면
 					if (Oscb.getSelectedItem().toString() == "Android")		// 우측 콤보박스 1
@@ -298,7 +293,7 @@ public class MyProject extends JFrame implements ActionListener {
 					}
 				};
 				for (int i = 0; i < Head.size(); i++) {
-					if (Head.get(i) == "NAME") {
+					if (Head.get(i) == "MODEL") {
 						NAME_COLUMN = i;
 					} else if (Head.get(i) == "SALARY") {
 						SALARY_COLUMN = i;
@@ -338,7 +333,7 @@ public class MyProject extends JFrame implements ActionListener {
 						model.addRow(tuple);
 						rowCnt++;
 					}
-					totalCount.setText(String.valueOf(rowCnt));
+					totalCount.setText(String.valueOf(rowCnt));					// 전체갯수 표시
 
 				} catch (SQLException ee) {
 					System.out.println("actionPerformed err : " + ee);
@@ -360,7 +355,7 @@ public class MyProject extends JFrame implements ActionListener {
 		}
 
 		}
-/*
+		/*
 		// DELETE
 		if (e.getSource() == Delete_Button) {				// Delete_Button의 기능은 위에서 다이얼로그로 대체되었음
 			Vector<String> delete_ssn = new Vector<String>();
