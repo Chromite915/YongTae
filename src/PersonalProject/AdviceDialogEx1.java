@@ -108,7 +108,7 @@ class AdviceDialogEx1 extends JDialog implements ActionListener {
 		setTitle("Information Retrival System");
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1300, 600);
-		//setLocationRelativeTo(null);							// 화면 중앙에 창 위치
+		setLocationRelativeTo(null);							// 화면 중앙에 창 위치
 		//setVisible(true);
 		
 		

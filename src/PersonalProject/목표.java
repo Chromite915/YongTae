@@ -1,25 +1,25 @@
 package PersonalProject;
 
-public class 해야할것 {
+public class 목표 {
 	/* DBMS 관련해서는 자유롭게 질문 가능
 	 * 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 - 깃허브 토큰
 	 * 문의댓글 확인하기
 	 * 
 	 * 
-	 * [참고사항]
-	 * 다이얼로그
-	 * TextArea에 내용 출력하기
+	 * [참고]
 	 * 
 	 * 
-	 * [과제]
-	 * 판매등록 창에서 imei 입력칸에 status가 here인 record의 imei 값만 입력 가능하도록 한다
-	 * OS별, 상태별 검색 가능하도록 하기
-	 * 판매등록, 재고이동 버튼이 기능을 하지 않는다
+	 * [목표]
+	 * status가 here인 재고의 imei값으로만 판매등록이 가능하도록 한다.
+	 * OS별, 상태별 출력 가능하도록 한다.
+	 * 고객명, 판매일, 이동일 등으로 검색할 수 있도록 한다.
+	 * stock 테이블에 record 입력시 imei값이 중복되지 않도록 한다.
 	 * 
 	 * 
 	 * [오류]
 	 * 해결 - 갤럭시북에서 오류가 났던 이유는 Properties - Java Build Path - Libraries - MySQL Connector의 경로가 학원컴과 갤북이 달랐기때믄.
 	 * OS별 검색 안됨
+	 * 판매등록, 재고이동 버튼이 기능을 하지 않는다
 	 * 
 	 * 
 	 * 

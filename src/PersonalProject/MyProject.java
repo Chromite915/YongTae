@@ -166,8 +166,6 @@ public class MyProject extends JFrame implements ActionListener {
 	}
 	
 	
-	
-	
 
 	public void actionPerformed(ActionEvent e) {				// DB연결도 Action에 들어가나?
 
@@ -353,157 +351,10 @@ public class MyProject extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(null, "검색 항목을 한개 이상 선택하세요.");		// 검색항목 아무것도 선택 안하면 뜨는 창
 			}
 		}
-
-		}
-		/*
-		// DELETE
-		if (e.getSource() == Delete_Button) {				// Delete_Button의 기능은 위에서 다이얼로그로 대체되었음
-			Vector<String> delete_ssn = new Vector<String>();
-
-			try {
-
-				String columnName = model.getColumnName(2);
-				if (columnName == "SSN") {
-					for (int i = 0; i < table.getRowCount(); i++) {
-						if (table.getValueAt(i, 0) == Boolean.TRUE) {
-							delete_ssn.add((String) table.getValueAt(i, 2));
-						}
-					}
-					// for, if문을 통해 각 ‘선택’ 체크박스가 체크된 행의 ssn를 vector에 더함.
-					
-					
-					
-					for (int i = 0; i < delete_ssn.size(); i++) {
-						for (int k = 0; k < model.getRowCount(); k++) {
-							if (table.getValueAt(k, 0) == Boolean.TRUE) {
-								model.removeRow(k);
-								totalCount.setText(String.valueOf(table.getRowCount()));
-							}
-						}
-					}
-					for (int i = 0; i < delete_ssn.size(); i++) {
-						String deleteStmt = "DELETE FROM EMPLOYEE WHERE Ssn=?";				// 테이블명 employee
-						PreparedStatement p = conn.prepareStatement(deleteStmt);
-						p.clearParameters();
-						p.setString(1, String.valueOf(delete_ssn.get(i)));
-						p.executeUpdate();
-
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "삭제 작업을 진행하시려면 NAME, SSN 항목을 모두 체크해주세요.");
-				}
-				// .removeRow() 함수를 통해 해당 행 삭제 및 vector에 저장된 ssn을 이용하여 delete SQL문을 실행.
-				// 체크박스 제외 2번째 열의 column name이 SSN이 아니라면 검색 항목 중 NAME, SSN을 체크하도록 알림창을 띄우고, delete문은 실행하지 않음.
-
-				
-				
-				
-				ShowSelectedEmp.setText(" ");
-
-			} catch (SQLException e1) {
-				System.out.println("actionPerformed err : " + e1);
-				e1.printStackTrace();
-			}
-			panel = new JPanel();
-			ScPane = new JScrollPane(table);					// Table를 기반으로 한 스크롤판
-			ScPane.setPreferredSize(new Dimension(1100, 400));
-			panel.add(ScPane);									// Panel -> ScPane
-			add(panel, BorderLayout.CENTER);
-			revalidate();
-
-		} 								// DELETE 끝
-
-		// UPDATEㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-		// 이걸 재고량 수정으로 바꿀거야
-		if (e.getSource() == Update_Button) {
-			Vector<String> update_ssn = new Vector<String>();
-			try {
-				String columnName = model.getColumnName(6);	// Stock Count 체크박스가 위치한 번호로 수정하기
-				if (columnName == "SALARY") {				// Stock Count로 수정하기
-					for (int i = 0; i < table.getRowCount(); i++) {
-						if (table.getValueAt(i, 0) == Boolean.TRUE) {
-							update_ssn.add((String) table.getValueAt(i, 2));
-							String updateSalary = setSalary.getText();	// 현재 월급TF 참조상태이지만, 판매/이동 버튼 누르면 나오는 TF를 참조하도록 수정하기
-							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);
-						}
-					}
-					for (int i = 0; i < update_ssn.size(); i++) {
-						String updateStmt = "UPDATE EMPLOYEE SET Salary=? WHERE Ssn=?";
-						PreparedStatement p = conn.prepareStatement(updateStmt);
-						p.clearParameters();
-						String updateSalary = setSalary.getText();
-						p.setString(1, updateSalary);
-						p.setString(2, String.valueOf(update_ssn.get(i)));
-						p.executeUpdate();
-
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "수정 작업을 진행하시려면 검색 항목을 모두 체크해주세요.");
-				}
-				// for, if문을 통해 각 ‘선택’ 체크박스가 체크된 행의 ssn를 vector에 더함.
-				// setValueAt() 함수를 통해 salary열을 찾아 수정된 salary 값을 삽입하고 vector에 저장된 ssn을 이용하여 update set SQL문을 실행.
-				// 만약 체크박스 제외 6번째 열의 column name이 SALARY가 아니라면 검색 항목을 모두 체크하도록 알림창을 띄우고, salary update는 하지 않음.
-
-				ShowSelectedEmp.setText(" ");
-
-			} catch (SQLException e1) {
-				System.out.println("actionPerformed err : " + e1);
-				e1.printStackTrace();
-			}
-			panel = new JPanel();
-			ScPane = new JScrollPane(table);
-			ScPane.setPreferredSize(new Dimension(1100, 400));
-			panel.add(ScPane);
-			add(panel, BorderLayout.CENTER);
-			revalidate();
-
-		} // UPDATE 끝
 	}
-	
-	
-	
-	
-									// 선택한 직원 출력
-	public class CheckBoxModelListener implements TableModelListener {
-		public void tableChanged(TableModelEvent e) {
-			int row = e.getFirstRow();
-			int column = e.getColumn();
-			if (column == BOOLEAN_COLUMN) {
-				TableModel model = (TableModel) e.getSource();
-				String columnName = model.getColumnName(1);
-				Boolean checked = (Boolean) model.getValueAt(row, column);
-				if (columnName == "NAME") {
-					if (checked) {
-						dShow = "";
-						for (int i = 0; i < table.getRowCount(); i++) {
-							if (table.getValueAt(i, 0) == Boolean.TRUE) {
-								dShow += (String) table.getValueAt(i, NAME_COLUMN) + "    ";
-
-							}
-						}
-						ShowSelectedEmp.setText(dShow);
-					} else {
-						dShow = "";
-						for (int i = 0; i < table.getRowCount(); i++) {
-							if (table.getValueAt(i, 0) == Boolean.TRUE) {
-								dShow += (String) table.getValueAt(i, 1) + "    ";
-
-							}
-						}
-						ShowSelectedEmp.setText(dShow);
-						// JTable에서 테이블의 특정 값이 바뀌었을 때 실행.
-						// boolean(체크박스)값이 있는 열이 0번열이므로 상수로 위에서 지정,
-						// if (column==BOOLEAN_COLUMN)의 값이 체크되었을 때, 체크 해제되었을 때 전체 열 중에 체크 되어있는 열의 NAME을 읽어서 출력.
-						// 만약 체크박스 바로 다음 열의 column name이 NAME이 아니라면 NAME 출력하지 않음.
-					}
-				}
-			}
-		}
-	}*/
 
 	public static void main(String[] args) {
 		new MyProject();
-		
 		
 	}
 }
