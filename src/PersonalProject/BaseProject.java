@@ -10,6 +10,10 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+/*
+ * table(표) - model(표의 형태) - head(벡터, 표의 내용물)
+ */
+
 public class BaseProject extends JFrame implements ActionListener {
 
 	public Connection conn;
@@ -254,7 +258,7 @@ public class BaseProject extends JFrame implements ActionListener {
 				// DefaultTableModel (1열 checkbox 제외 table cell 직접 수정 불가) 및 JTable 생성. (Salary 수정 및 선택된 직원 이름 출력을 위해 해당 열 저장)
 				// JTable은 이후 행의 1열의 Boolean 값을 ‘선택’ 열에서 체크박스로 나타내기 위해 Boolean.class 반환.
 				// 1열 = 결과테이블의 첫번째 체크박스 세로영역
-				model = new DefaultTableModel(Head, 0) {	// 결과테이블의 첫번째 가로영역(0 = 첫번째)
+				model = new DefaultTableModel(Head, 0) {	// head = 벡터
 					@Override
 					public boolean isCellEditable(int row, int column) {
 						if (column > 0) {
@@ -265,13 +269,13 @@ public class BaseProject extends JFrame implements ActionListener {
 					}
 				};
 				for (int i = 0; i < Head.size(); i++) {
-					if (Head.get(i) == "NAME") {
+					if (Head.get(i) == "NAME") {			// head 벡터의 i번째 값이 NAME일때, NAME_COLUMN = i
 						NAME_COLUMN = i;
 					} else if (Head.get(i) == "SALARY") {
-						SALARY_COLUMN = i;
+						SALARY_COLUMN = i;					// COLUMN의 자리 번호를 지정해주고있다
 					}
 				}
-				table = new JTable(model) {
+				table = new JTable(model) {				// 만든 table에 model이라는 형태를 지정
 					@Override
 					public Class getColumnClass(int column) {
 						if (column == 0) {
@@ -389,13 +393,13 @@ public class BaseProject extends JFrame implements ActionListener {
 		if (e.getSource() == Update_Button) {
 			Vector<String> update_ssn = new Vector<String>();
 			try {
-				String columnName = model.getColumnName(6);	// Stock Count 체크박스가 위치한 번호로 수정하기
-				if (columnName == "SALARY") {				// Stock Count로 수정하기
-					for (int i = 0; i < table.getRowCount(); i++) {
-						if (table.getValueAt(i, 0) == Boolean.TRUE) {
-							update_ssn.add((String) table.getValueAt(i, 2));
-							String updateSalary = setSalary.getText();	// 현재 월급TF 참조상태이지만, 판매/이동 버튼 누르면 나오는 TF를 참조하도록 수정하기
-							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);
+				String columnName = model.getColumnName(6);				// Stock Count 체크박스가 위치한 번호로 수정하기
+				if (columnName == "SALARY") {							// Stock Count로 수정하기
+					for (int i = 0; i < table.getRowCount(); i++) {		// row = 행
+						if (table.getValueAt(i, 0) == Boolean.TRUE) {	// 어떤 행을 선택(체크)했을 경우
+							update_ssn.add((String) table.getValueAt(i, 2));	// i번째 행의 2번째 열(ssn)을 update_ssn 한다
+							String updateSalary = setSalary.getText();			// updateSalary = setSalary TextField에 입력된 값
+							table.setValueAt(Double.parseDouble(updateSalary), i, SALARY_COLUMN);	// double, SALARY_COLUMN의 기본값은 0
 						}
 					}
 					for (int i = 0; i < update_ssn.size(); i++) {
